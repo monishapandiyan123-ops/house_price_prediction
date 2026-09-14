@@ -5,7 +5,7 @@ import pandas as pd
 app = Flask(__name__)
 
 # Load the trained ML model
-model = joblib.load("house_price_prediction_model.joblib")
+model = joblib.load("House_price_prediction_model.joblib")
 
 
 # Home page
