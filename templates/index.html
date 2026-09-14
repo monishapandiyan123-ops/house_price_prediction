@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>House Price Prediction</title>
+</head>
+
+<body>
+
+    <h1>House Price Prediction</h1>
+
+    <form action="/predict" method="POST">
+
+        <!-- City -->
+        <label>City:</label>
+        <input type="text" name="city" required>
+        <br><br>
+
+        <!-- Year Built -->
+        <label>Year Built:</label>
+        <select name="yr_built_bin" required>
+            <option value="1900-1916">1900-1916</option>
+            <option value="1917-1932">1917-1932</option>
+            <option value="1933-1948">1933-1948</option>
+            <option value="1949-1964">1949-1964</option>
+            <option value="1965-1980">1965-1980</option>
+            <option value="1981-1996">1981-1996</option>
+            <option value="1997-2014">1997-2014</option>
+        </select>
+        <br><br>
+
+        <!-- Sqft Living -->
+        <label>Sqft Living:</label>
+        <input type="number" name="sqft_living" required>
+        <br><br>
+
+        <!-- Sqft Above -->
+        <label>Sqft Above:</label>
+        <input type="number" name="sqft_above" required>
+        <br><br>
+
+        <!-- Bedrooms -->
+        <label>Bedrooms:</label>
+        <input type="number" name="bedrooms" required>
+        <br><br>
+
+        <!-- Bathrooms -->
+        <label>Bathrooms:</label>
+        <input type="number" name="bathrooms" step="0.5" required>
+        <br><br>
+
+        <!-- Floors -->
+        <label>Floors:</label>
+        <input type="number" name="floors" step="0.5" required>
+        <br><br>
+
+        <!-- View -->
+        <label>View:</label>
+        <select name="view" required>
+            <option value="0">0 - No view</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4 - Best view</option>
+        </select>
+        <br><br>
+
+        <!-- Waterfront -->
+        <label>Waterfront:</label>
+        <select name="waterfront" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <br><br>
+
+        <!-- Condition -->
+        <label>Condition:</label>
+        <select name="condition" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <br><br>
+
+        <!-- Renovated -->
+        <label>Renovated:</label>
+        <select name="renovated" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <br><br>
+
+        <button type="submit">Predict Price</button>
+
+    </form>
+
+
+    {% if prediction %}
+        <h2>Predicted House Price: {{ prediction }}</h2>
+    {% endif %}
+
+</body>
+
+</html>
