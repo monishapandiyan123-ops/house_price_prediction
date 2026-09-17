@@ -234,41 +234,62 @@ The project successfully demonstrates an end-to-end machine learning workflow:
 * Add additional housing features.
 * Experiment with advanced machine learning and ensemble techniques.
 * Monitor model performance after deployment.
+
 ## 📈 Model Evaluation
 
-Three regression models were compared using cross-validation:
+Three regression models were compared using 5-fold cross-validation:
 
-| Model                 | CV R² Mean | CV R² Std | CV MAE Mean | CV RMSE Mean |
-| --------------------- | ---------: | --------: | ----------: | -----------: |
-| **Linear Regression** | **0.6830** |    0.0302 |      87,659 |      124,451 |
-| XGBoost               |     0.6814 |    0.0166 |  **86,788** |      124,830 |
-| LightGBM              |     0.6552 |    0.0236 |      91,475 |      129,747 |
+| **Model**     | **CV R² Mean** | **CV R² Std** | **CV MAE Mean** | **CV RMSE Mean** |
+| ------------- | -------------: | ------------: | --------------: | ---------------: |
+| **CatBoost**  |     **0.7002** |        0.0107 |      **86,187** |      **123,726** |
+| XGBoost       |         0.6843 |        0.0053 |          87,456 |          126,965 |
+| Random Forest |         0.6605 |        0.0110 |          92,188 |          131,666 |
 
-Based on the overall cross-validation performance, **Linear Regression was selected as the baseline model** and further evaluated on the unseen test dataset.
+Based on the overall cross-validation performance, **CatBoost was selected as the best baseline model** and further evaluated on the unseen test dataset.
 
-### Final Linear Regression Performance
+### CatBoost Hyperparameter Tuning
 
-| Metric |   Training |    Testing |
-| ------ | ---------: | ---------: |
-| MAE    |  86,038.53 |  92,618.05 |
-| RMSE   | 122,112.48 | 127,864.62 |
-| R²     |     0.6970 | **0.7019** |
+CatBoost was further optimized using hyperparameter tuning with 5-fold cross-validation.
+
+**Best Parameters:**
+
+* `iterations`: 800
+* `learning_rate`: 0.03
+* `depth`: 5
+* `l2_leaf_reg`: 5
+* `random_strength`: 5
+* `bagging_temperature`: 2
+
+**Best CV R²:** **0.6991**
+
+### Final CatBoost Performance
+
+| **Metric** | **Training** |    **Testing** |
+| ---------- | -----------: | -------------: |
+| MAE        |    76,429.39 |  **85,673.10** |
+| RMSE       |   108,235.12 | **122,154.59** |
+| R²         |       0.7707 |     **0.7047** |
+
+The final CatBoost model achieved a **testing R² score of 0.7047**, meaning that the model explains approximately **70.5% of the variation in house prices** on the unseen test dataset.
 
 ### Overfitting Check
 
-* **Training R²:** 0.6970
-* **Testing R²:** 0.7019
-* **R² Gap:** -0.0049
+* **Training R²:** 0.7707
+* **Testing R²:** 0.7047
+* **R² Gap:** 0.0661
 
-The very small difference between training and testing R² indicates that the model generalizes well to unseen data and does not show significant overfitting.
+The training R² is higher than the testing R², resulting in an R² gap of approximately **6.6 percentage points**. This indicates **some degree of overfitting**, although the model still maintains a testing R² of approximately 70.5% on unseen data.
 
-The final Linear Regression model achieved an **R² score of 0.7019**, meaning it explains approximately **70.2% of the variation in house prices** on the unseen test dataset.
+The relatively close cross-validation score (**0.6991**) and testing score (**0.7047**) also indicate that the model's performance is reasonably consistent with its validation performance.
 
 ### Final Model Selection
 
-**Final Model: Linear Regression**
+**Final Model: CatBoost Regressor**
 
-The model was selected based on its cross-validation performance, final test performance, and good generalization between training and testing data.
+CatBoost was selected based on its cross-validation performance and final test performance. It achieved the highest mean CV R² (**0.7002**) among the compared baseline models and achieved a final testing R² of **0.7047**.
+
+The model was then used as the final model for the house price prediction application.
+
 
 
 ## 👩‍💻 Author
