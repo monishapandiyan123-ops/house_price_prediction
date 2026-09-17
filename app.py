@@ -22,10 +22,9 @@ def predict():
     city = str(request.form["city"])
     yr_built_bin = str(request.form["yr_built_bin"])
     #age = int(request.form["age"])
-    sqft_living = int(request.form["sqft_living"])
+    sqft_basement = int(request.form["sqft_basement"])
     sqft_above = int(request.form["sqft_above"])
-    bedrooms = int(request.form["bedrooms"])
-    bathrooms = int(request.form["bathrooms"])
+    total_rooms = int(request.form["total_rooms"])
     floors = int(request.form["floors"])
     view = int(request.form["view"])
     waterfront = int(request.form["waterfront"])
@@ -36,10 +35,9 @@ def predict():
     new_data = pd.DataFrame({
          "city" : [city] ,
          "yr_built_bin" : [yr_built_bin] ,
-         "sqft_living": [sqft_living],
+         "sqft_basement": [sqft_basement],
          "sqft_above":[sqft_above],
-         "bedrooms": [bedrooms],
-         "bathrooms": [bathrooms],
+         "total_rooms": [total_rooms],
          "floors": [floors],
          "view":[view],
          # "age":[age],
